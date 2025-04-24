@@ -1,29 +1,19 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                      +:+                     #
-#    By: jvorstma <marvin@codam.nl>                   +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/08/02 14:26:37 by jvorstma      #+#    #+#                  #
-#    Updated: 2023/11/17 13:52:58 by jvorstma         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+#Makefile for the Minishell project
 
-CC= cc
-CFLAGS= -Wall -Wextra -Werror #-g3 -fsanitize=address
-LFLAGS= -lreadline
-RM= rm -rf
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+LFLAGS = -lreadline
+RM = rm -rf
 
-NAME= minishell
-HEADER= minishell.h
+NAME = minishell
+HEADER = minishell.h
 
-LIBFT_DIR= ./libft
-LIBFT= $(LIBFT_DIR)/libftprintf.a
+LIBFT_DIR = ./libft
+LIBFT = $(LIBFT_DIR)/libftprintf.a
 
-ODIR= obj
+ODIR = obj
 
-SOURCE= main.c \
+SOURCE = main.c \
 		commands.c \
 		initialize.c \
 		compare.c \
@@ -55,9 +45,19 @@ SOURCE= main.c \
 		pipe_list.c \
 		redirection_list.c \
 		commands1.c \
-		signal_handling1.c \
-		
-OBJECT= $(addprefix $(ODIR)/,$(SOURCE:.c=.o))
+		signal_handling1.c
+
+OBJECT = $(addprefix $(ODIR)/,$(SOURCE:.c=.o))
+
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Darwin)
+    CFLAGS += -I/opt/homebrew/opt/readline/include
+    LFLAGS += -L/opt/homebrew/opt/readline/lib
+else
+    CFLAGS += -I/usr/include/readline
+    LFLAGS += -L/usr/lib -lreadline
+endif
 
 all: $(LIBFT) $(NAME)
 

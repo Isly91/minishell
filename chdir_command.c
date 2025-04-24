@@ -12,27 +12,6 @@
 
 #include "minishell.h"
 
-// handle to many arguments
-// static int	ft_print_error(t_main *main, char *s3)
-// {
-// 	char	*prompt_trimmed;
-// 	int		x;
-
-// 	if (!main || !main->token || !main->token->parameters)
-// 		return (0);
-// 	prompt_trimmed = ft_strtrim(main->prompt, " ");
-// 	if (!prompt_trimmed)
-// 		return (0);
-// 	x = ft_print_fd(prompt_trimmed, 2);
-// 	ft_free_single_array(prompt_trimmed);
-// 	x *= ft_print_fd(": cd:", 2);
-// 	x *= ft_print_fd(main->token->parameters[1], 2);
-// 	x *= ft_print_fd(": ", 2);
-// 	x *= ft_print_fd(s3, 2);
-// 	x *= ft_print_fd("\n", 2);
-// 	return (x);
-// }
-
 static void	ft_create_old_pwd(t_main *main)
 {
 	t_env	*tmp;
